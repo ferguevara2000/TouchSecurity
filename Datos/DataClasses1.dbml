@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="TouchSecurity" Class="DataClasses1DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=TouchSecurity.mssql.somee.com;Initial Catalog=TouchSecurity;Persist Security Info=True;User ID=jeangr20_SQLLogin_1" SettingsObjectName="Datos.Properties.Settings" SettingsPropertyName="TouchSecurityConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Ciudades" Member="Ciudades">
+    <Type Name="Ciudades">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Ciudad" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Provincia" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="Ciudades_Empresas" Member="Empresas" ThisKey="Id" OtherKey="Ciudad_Per" Type="Empresas" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Empresas" Member="Empresas">
+    <Type Name="Empresas">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Ruc" Type="System.String" DbType="NVarChar(13)" CanBeNull="true" />
+      <Column Name="Empresa_Nom" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Direccion" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Ciudad_Per" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Contrasenia" Type="System.String" DbType="NVarChar(15)" CanBeNull="true" />
+      <Column Name="Telefeno" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="Latitud" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Longitud" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Association Name="Empresas_Reportes" Member="Reportes" ThisKey="Id" OtherKey="Empresa_Per" Type="Reportes" />
+      <Association Name="Ciudades_Empresas" Member="Ciudades" ThisKey="Ciudad_Per" OtherKey="Id" Type="Ciudades" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Reportes" Member="Reportes">
+    <Type Name="Reportes">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Empresa_Per" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Descripcion" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="Fecha" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="Empresas_Reportes" Member="Empresas" ThisKey="Empresa_Per" OtherKey="Id" Type="Empresas" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>
